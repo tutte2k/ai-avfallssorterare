@@ -1,0 +1,89 @@
+AI-lösningsrapport: Automatiserad avfallssorteringsassistent 
+
+Bakgrund: 
+I detta projekt utvecklas en AI-baserad lösning för att hantera utmaningar med avfallssortering. 
+Korrekt avfallssortering är avgörande för miljömässig hållbarhet, och AI kan hjälpa individer genom att identifiera avfallskategorier baserat på användarinmatningar. 
+Detta stämmer överens med EU:s mål för avfallsminskning och återvinning. 
+
+Mål:
+Efter att ha slutfört detta projekt bör följande mål uppnås: 
+Förstå grundläggande AI-koncept och deras koppling till hållbarhetsmål och etiska överväganden. 
+Utveckla en AI-applikation som klassificerar avfallstyper med hjälp av enkla webteknologier. 
+Använd AI-API:er och formulera effektiva uppmaningar. 
+Reflektera över AI-lösningens påverkan på hållbarhet och etik. 
+
+Uppgift:
+En AI-baserad webbapplikation kommer att utvecklas för att hjälpa användare att sortera avfall korrekt. 
+Projektet består av tre delar: planering, genomförande och reflektion. 
+
+Del 1: Planering Problemval: 
+AI-lösningen kommer att hjälpa användare att identifiera om en artikel ska återvinnas, komposteras eller skickas till deponi. 
+Lösningsbeskrivning: AI-applikationen kommer att ta en bild eller textbeskrivning som indata och kategorisera den därefter. 
+Förtränade API-baserade modeller kommer att användas. 
+Detta bidrar till EU:s hållbarhetsmål genom att främja avfallsminskning och återvinning. 
+
+Etiska överväganden: 
+Potentiella fördomar i AI-förutsägelser eller fel i beslutsfattande. 
+Säkerställa noggrannhet för att undvika desinformation. 
+Transparens i AI-modellens begränsningar. 
+
+Del 2: 
+Implementering Applikationsutveckling: 
+Ett enkelt för-renderat webbgränssnitt (index.html) för användarinmatning. 
+En server-side-implementation (server.js) med Node.js och Express för att servera den statiska HTML-filen. 
+Integration med en gratis AI-API (t.ex. Hugging Face) för att klassificera avfallsprodukter. 
+
+Dokumentation: 
+
+I detta projekt används två maskininlärningsmodeller från Hugging Face:
+
+Bildklassificering
+Modell: convnext-tiny-224
+ConvNeXT är en renodlad konvolutionsmodell (ConvNet) som är inspirerad av designen hos Vision Transformers och påstås prestera bättre än dem.
+Författarna utgick från en ResNet och "moderniserade" dess design genom att hämta inspiration från Swin Transformer.
+
+Textklassificering (NLI)
+Modell: facebook/bart-large-mnli
+En Natural Language Inference-modell (NLI) som används här som zero-shot classifier. 
+Den kan avgöra vilken etikett som passar bäst på en given text bland en uppsättning alternativ.
+
+Exempel:
+
+// 1. Bilden skickas till bildmodellen
+const imageResponse = await queryImage(file.buffer);
+
+// 2. Den mest troliga etiketten (t.ex. "banana") används som input i textmodellen
+const topLabel = imageResponse.shift().label;
+const textResponse = await query({
+  inputs: `Hi, I would like to know which container to put this item in to recycle: ${topLabel}`,
+  parameters: {
+    candidate_labels: ["glass", "metal", "paper", "plastic", "food"],
+  },
+});
+
+// 3. Resultatet returneras till klienten
+const { labels, scores } = textResponse;
+
+Testning och analys: 
+| Testbild    | Förväntad kategori | Faktisk kategori (top 1) | Kommentar          |
+| ----------- | ------------------ | ------------------------ | ------------------ |
+| Äpple       | food               | food                     | ✔️ Stämmer överens |
+| Plastflaska | plastic            | plastic                  | ✔️ Stämmer överens |
+| Metallburk  | metal              | metal                    | ✔️ Stämmer överens |
+| Tidning     | paper              | paper                    | ✔️ Stämmer överens |
+| Vinglas     | glass              | glass                    | ✔️ Stämmer överens |
+
+
+
+Del 3: 
+Reflektion Hållbarhet och etik: 
+Bidrag till hållbarhet genom att förbättra avfallssortering. 
+Etiska överväganden angående transparens i AI-beslutsfattande. 
+Resultatet är inte alltid det rätta valet.
+
+
+Framtida förbättringar: 
+Möjliga funktionsförbättringar såsom streckkodsskanning. 
+Hantera medvetna felaktiga inmatningar
+Hantera false positives
+Laddningsnurra

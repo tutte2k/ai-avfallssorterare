@@ -71,7 +71,7 @@ Ett Node.js-projekt som använder två Hugging Face-modeller för att identifier
 ## ✅ Exempel
 
 1. Ladda upp en bild på ett äpple.
-2. Servern känner igen objektet som "banana".
+2. Servern känner igen objektet som "apple".
 3. Modellen svarar med "food" som högsta sannolikhet.
 4. Resultatet: "Släng i matavfall!"
 

@@ -52,7 +52,7 @@ Exempel:
 // 1. Bilden skickas till bildmodellen
 const imageResponse = await queryImage(file.buffer);
 
-// 2. Den mest troliga etiketten (t.ex. "banana") används som input i textmodellen
+// 2. Den mest troliga etiketten (t.ex. "apple") används som input i textmodellen
 const topLabel = imageResponse.shift().label;
 const textResponse = await query({
   inputs: `Hi, I would like to know which container to put this item in to recycle: ${topLabel}`,
